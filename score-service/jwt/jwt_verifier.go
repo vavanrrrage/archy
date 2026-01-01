@@ -1,4 +1,4 @@
-package main
+package jwt
 
 import (
 	"context"
@@ -15,7 +15,7 @@ import (
 type JWKVerifier struct {
 	authServiceURL  string
 	jwksURL         string
-	set             jwk.Set
+	Set             jwk.Set
 	keysExpiry      time.Time
 	mu              sync.RWMutex
 	refreshInterval time.Duration
@@ -25,7 +25,7 @@ func NewJWKVerifier(authServiceURL string) *JWKVerifier {
 	return &JWKVerifier{
 		authServiceURL:  authServiceURL,
 		jwksURL:         fmt.Sprintf("%s/api/auth/jwks", authServiceURL),
-		refreshInterval: 15 * time.Minute, 
+		refreshInterval: 15 * time.Minute,
 	}
 }
 
@@ -38,14 +38,14 @@ func (j *JWKVerifier) fetchJWKS() error {
 	j.mu.Lock()
 	defer j.mu.Unlock()
 
-	j.set = set
+	j.Set = set
 	j.keysExpiry = time.Now().Add(j.refreshInterval)
 	return nil
 }
 
 func (j *JWKVerifier) getJWKSet() (jwk.Set, error) {
 	j.mu.RLock()
-	set := j.set
+	set := j.Set
 	expiry := j.keysExpiry
 	j.mu.RUnlock()
 
@@ -59,7 +59,7 @@ func (j *JWKVerifier) getJWKSet() (jwk.Set, error) {
 
 	j.mu.RLock()
 	defer j.mu.RUnlock()
-	return j.set, nil
+	return j.Set, nil
 }
 
 func (j *JWKVerifier) VerifyToken(tokenString string) (jwt.Token, error) {
@@ -102,7 +102,7 @@ func (j *JWKVerifier) JWTMiddleware() echo.MiddlewareFunc {
 			}
 
 			c.Set("token", token)
-			
+
 			if sub := token.Subject(); sub != "" {
 				c.Set("user_id", sub)
 			}
@@ -115,4 +115,3 @@ func (j *JWKVerifier) JWTMiddleware() echo.MiddlewareFunc {
 func (j *JWKVerifier) Initialize() error {
 	return j.fetchJWKS()
 }
-

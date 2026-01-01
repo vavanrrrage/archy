@@ -1,8 +1,10 @@
+//go:build integration
 // +build integration
 
 package main
 
 import (
+	"archy/scores/jwt"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -125,7 +127,7 @@ func TestIntegration_ProtectedEndpoint_InvalidToken(t *testing.T) {
 
 func TestIntegration_GetTokenFromAuthService(t *testing.T) {
 	authURL := getEnv("AUTH_SERVICE_URL", defaultAuthURL)
-	
+
 	// First, try to get a token (this will fail without a session, but we can test the endpoint)
 	req, err := http.NewRequest("GET", authURL+"/api/auth/token", nil)
 	if err != nil {
@@ -150,7 +152,7 @@ func TestIntegration_GetTokenFromAuthService(t *testing.T) {
 func TestIntegration_VerifierInitialization(t *testing.T) {
 	authURL := getEnv("AUTH_SERVICE_URL", defaultAuthURL)
 
-	verifier := NewJWKVerifier(authURL)
+	verifier := jwt.NewJWKVerifier(authURL)
 	if err := verifier.Initialize(); err != nil {
 		t.Fatalf("Failed to initialize verifier with real JWKS endpoint: %v", err)
 	}
@@ -166,4 +168,3 @@ func TestIntegration_VerifierInitialization(t *testing.T) {
 
 	t.Logf("✅ JWT verifier successfully initialized with real JWKS endpoint")
 }
-

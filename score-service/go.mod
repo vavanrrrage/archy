@@ -1,4 +1,4 @@
-module example/hello
+module archy/scores
 
 go 1.25.5
 

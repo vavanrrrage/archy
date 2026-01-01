@@ -1,6 +1,7 @@
 package main
 
 import (
+	"archy/scores/jwt"
 	"net/http"
 	"os"
 
@@ -17,7 +18,7 @@ func main() {
 	}
 
 	// Initialize JWT verifier
-	jwtVerifier := NewJWKVerifier(authServiceURL)
+	jwtVerifier := jwt.NewJWKVerifier(authServiceURL)
 	if err := jwtVerifier.Initialize(); err != nil {
 		e.Logger.Fatal("Failed to initialize JWT verifier: ", err)
 	}

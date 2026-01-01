@@ -1,6 +1,7 @@
 package main
 
 import (
+	"archy/scores/jwt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -35,7 +36,7 @@ func TestJWKVerifier_FetchJWKS(t *testing.T) {
 	defer mockServer.Close()
 
 	// Create verifier pointing to mock server
-	verifier := NewJWKVerifier(mockServer.URL)
+	verifier := jwt.NewJWKVerifier(mockServer.URL)
 
 	// Test fetching JWKS
 	err := verifier.Initialize()
@@ -44,7 +45,7 @@ func TestJWKVerifier_FetchJWKS(t *testing.T) {
 	}
 
 	// Verify that keys were fetched
-	if verifier.set == nil {
+	if verifier.Set == nil {
 		t.Error("JWK set should not be nil after initialization")
 	}
 }
@@ -57,7 +58,7 @@ func TestJWKVerifier_Middleware_MissingAuth(t *testing.T) {
 	}))
 	defer mockServer.Close()
 
-	verifier := NewJWKVerifier(mockServer.URL)
+	verifier := jwt.NewJWKVerifier(mockServer.URL)
 	verifier.Initialize()
 
 	// Create a simple handler
@@ -90,7 +91,7 @@ func TestJWKVerifier_Middleware_InvalidFormat(t *testing.T) {
 	}))
 	defer mockServer.Close()
 
-	verifier := NewJWKVerifier(mockServer.URL)
+	verifier := jwt.NewJWKVerifier(mockServer.URL)
 	verifier.Initialize()
 
 	handler := verifier.JWTMiddleware()(func(c echo.Context) error {
@@ -113,4 +114,3 @@ func TestJWKVerifier_Middleware_InvalidFormat(t *testing.T) {
 		t.Errorf("Expected HTTP 401 error, got: %v", err)
 	}
 }
-
