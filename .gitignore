@@ -77,3 +77,4 @@ auth-service/package-lock.json
 
 auth-service/prisma/generated
 pgdata/
+art/
