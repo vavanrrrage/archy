@@ -21,8 +21,8 @@ profile.cov
 # vendor/
 
 # Go workspace file
-go.work
-go.work.sum
+score-service/go.work
+score-service/go.work.sum
 
 # env file
 .env
@@ -30,3 +30,48 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+auth-service/node_modules
+auth-service/.pnp
+auth-service/.pnp.js
+
+# testing
+auth-service/coverage
+
+# next.js
+auth-service/.next/
+auth-service/out/
+
+# production
+auth-service/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+auth-service/npm-debug.log*
+auth-service/yarn-debug.log*
+auth-service/yarn-error.log*
+
+# local env files
+auth-service/.env.local
+auth-service/.env.development.local
+auth-service/.env.test.local
+auth-service.env.production.local
+auth-service/.env
+
+# vercel
+auth-service/.vercel
+
+**/*.trace
+**/*.zip
+**/*.tar.gz
+**/*.tgz
+**/*.log
+auth-service/package-lock.json
+**/*.bun
+/prisma/generated/prisma
