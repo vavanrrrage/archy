@@ -74,4 +74,6 @@ auth-service/.vercel
 **/*.log
 auth-service/package-lock.json
 **/*.bun
-/prisma/generated/prisma
+
+auth-service/prisma/generated
+pg_data/
