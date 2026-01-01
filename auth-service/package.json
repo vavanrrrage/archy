@@ -6,15 +6,20 @@
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
+    "@better-auth/cli": "^1.4.10",
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
     "better-auth": "^1.4.10",
     "dotenv": "^17.2.3",
     "elysia": "latest",
+    "nodemailer": "^7.0.12",
     "pg": "^8.16.3"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@types/nodemailer": "^7.0.4",
+    "@types/pg": "^8.16.0",
+    "bun-types": "latest",
+    "prisma": "^7.2.0"
   },
   "module": "src/index.js"
 }

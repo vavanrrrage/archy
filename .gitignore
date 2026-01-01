@@ -76,4 +76,4 @@ auth-service/package-lock.json
 **/*.bun
 
 auth-service/prisma/generated
-pg_data/
+pgdata/
