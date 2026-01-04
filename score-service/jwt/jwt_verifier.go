@@ -104,7 +104,7 @@ func (j *JWKVerifier) JWTMiddleware() echo.MiddlewareFunc {
 			c.Set("token", token)
 
 			if sub := token.Subject(); sub != "" {
-				c.Set("user_id", sub)
+				c.Set("external_user_id", sub)
 			}
 
 			return next(c)
