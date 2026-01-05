@@ -231,10 +231,6 @@ CREATE TRIGGER update_shots_updated_at
     BEFORE UPDATE ON shots
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
-CREATE TRIGGER update_user_preferences_updated_at
-    BEFORE UPDATE ON user_preferences
-    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
-
 -- Trigger to update set statistics when shots change
 CREATE OR REPLACE FUNCTION update_set_statistics()
 RETURNS TRIGGER AS $$

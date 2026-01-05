@@ -8,7 +8,6 @@ DROP TRIGGER IF EXISTS update_shots_updated_at ON shots;
 DROP TRIGGER IF EXISTS update_sets_updated_at ON sets;
 DROP TRIGGER IF EXISTS update_qualification_rounds_updated_at ON qualification_rounds;
 DROP TRIGGER IF EXISTS update_target_faces_updated_at ON target_faces;
-DROP TRIGGER IF EXISTS update_user_preferences_updated_at ON user_preferences;
 
 -- Drop functions
 DROP FUNCTION IF EXISTS update_set_statistics();

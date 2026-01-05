@@ -25,7 +25,6 @@ func (s *QualificationRoundService) CreateQualificationRound(
 	externalUserID string,
 	req models.CreateQualificationRoundRequest,
 ) (*db.QualificationRound, error) {
-	// Подготавливаем параметры для запроса
 	params := db.CreateQualificationRoundParams{
 		ExternalUserID: externalUserID,
 		RoundType:      req.RoundType,
@@ -37,7 +36,6 @@ func (s *QualificationRoundService) CreateQualificationRound(
 		Notes:          pgtype.Text{String: req.Notes, Valid: true},
 	}
 
-	// Время начала
 	if req.StartTime != nil {
 		params.StartTime = pgtype.Timestamptz{
 			Time:  *req.StartTime,

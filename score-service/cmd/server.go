@@ -14,7 +14,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-var connectionStr = "postgres://postgres:postgres@localhost:5432/postgres"
+var connectionStr = "postgresql://archy:12345678@localhost:5430/archy?sslmode=disable"
 
 func main() {
 
